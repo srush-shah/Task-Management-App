@@ -31,15 +31,9 @@ const newCard = ({
 const loadInitialTaskCards = () => {
   //access local storage
   const getInitialData = localStorage.getItem("tasky");
-  if (!getInitialData) return;
   //convert stringified-object to object
-  const { cards } = JSON.parse(getInitialData);
+  const taskObjects = 
   //map around the array to generate HTML card and inject it to DOM.
-  cards.map((cardObject) => {
-    const createNewCard = newCard(cardObject);
-    taskContainer.insertAdjacentHTML("beforeend", createNewCard);
-    globalStore.push(cardObject);
-  });
 };
 
 const saveChanges = () => {
