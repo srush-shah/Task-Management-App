@@ -42,9 +42,6 @@ const loadInitialTaskCards = () => {
   });
 };
 
-const updateLocalStorage = () =>
-  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
-
 const saveChanges = () => {
   const taskData = {
     id: `${Date.now()}`, // unique number for card id
@@ -61,7 +58,7 @@ const saveChanges = () => {
 
   //Calling local storage API for pushing the updated array to local storage
   //API - Application Programming Interface
-  updateLocalStorage();
+  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
 };
 
 const deleteCard = (event) => {
@@ -70,8 +67,11 @@ const deleteCard = (event) => {
   const targetID = event.target.id;
   const tagname = event.target.tagName;
   //search the globalStore array, remove the object with the id.
-  globalStore = globalStore.filter((cardObject) => cardObject.id !== targetID);
-  updateLocalStorage();
+  const newUpdatedArr = globalStore.filter((cardObject) => {
+    cardObject.id !== targetID
+  );
+  globalStore = newUpdatedArr;
+  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
   //access DOM to remove them.
   if (tagname === "BUTTON") {
     return event.target.parentNode.parentNode.parentNode.parentNode.removeChild(

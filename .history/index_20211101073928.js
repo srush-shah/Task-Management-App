@@ -2,7 +2,7 @@
 const taskContainer = document.querySelector(".task_container");
 
 //Global store
-let globalStore = [];
+const globalStore = [];
 
 const newCard = ({
   id,
@@ -14,7 +14,7 @@ const newCard = ({
 <div class="card text-start">
   <div class="card-header d-flex justify-content-end gap-2">
     <button type="button" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i></button>
-    <button type="button" id=${id} class="btn btn-outline-danger" onclick="deleteCard(this, arguments)"><i class="fas fa-trash-alt" id=${id} onclick="deleteCard(this,arguments)"></i></button>
+    <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
   </div>
   <img src=${imageUrl} class="card-img-top" alt="Task Image">
   <div class="card-body">
@@ -30,7 +30,7 @@ const newCard = ({
 
 const loadInitialTaskCards = () => {
   //access local storage
-  const getInitialData = localStorage.getItem("tasky");
+  const getInitialData = localStorage.tas;
   if (!getInitialData) return;
   //convert stringified-object to object
   const { cards } = JSON.parse(getInitialData);
@@ -41,9 +41,6 @@ const loadInitialTaskCards = () => {
     globalStore.push(cardObject);
   });
 };
-
-const updateLocalStorage = () =>
-  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
 
 const saveChanges = () => {
   const taskData = {
@@ -61,25 +58,5 @@ const saveChanges = () => {
 
   //Calling local storage API for pushing the updated array to local storage
   //API - Application Programming Interface
-  updateLocalStorage();
-};
-
-const deleteCard = (event) => {
-  //get id of the card
-  event = window.event;
-  const targetID = event.target.id;
-  const tagname = event.target.tagName;
-  //search the globalStore array, remove the object with the id.
-  globalStore = globalStore.filter((cardObject) => cardObject.id !== targetID);
-  updateLocalStorage();
-  //access DOM to remove them.
-  if (tagname === "BUTTON") {
-    return event.target.parentNode.parentNode.parentNode.parentNode.removeChild(
-      event.target.parentNode.parentNode.parentNode
-    );
-  }
-  //IF Tag is icon tag inside the button tag.
-  return event.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(
-    event.target.parentNode.parentNode.parentNode.parentNode
-  );
+  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
 };

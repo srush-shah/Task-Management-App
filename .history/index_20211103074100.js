@@ -14,7 +14,7 @@ const newCard = ({
 <div class="card text-start">
   <div class="card-header d-flex justify-content-end gap-2">
     <button type="button" class="btn btn-outline-success"><i class="fas fa-pencil-alt"></i></button>
-    <button type="button" id=${id} class="btn btn-outline-danger" onclick="deleteCard(this, arguments)"><i class="fas fa-trash-alt" id=${id} onclick="deleteCard(this,arguments)"></i></button>
+    <button type="button" id=${id} class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
   </div>
   <img src=${imageUrl} class="card-img-top" alt="Task Image">
   <div class="card-body">
@@ -42,9 +42,6 @@ const loadInitialTaskCards = () => {
   });
 };
 
-const updateLocalStorage = () =>
-  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
-
 const saveChanges = () => {
   const taskData = {
     id: `${Date.now()}`, // unique number for card id
@@ -61,25 +58,23 @@ const saveChanges = () => {
 
   //Calling local storage API for pushing the updated array to local storage
   //API - Application Programming Interface
-  updateLocalStorage();
+  localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
 };
 
 const deleteCard = (event) => {
   //get id of the card
   event = window.event;
-  const targetID = event.target.id;
-  const tagname = event.target.tagName;
+  const targetID = event.taget.id;
   //search the globalStore array, remove the object with the id.
-  globalStore = globalStore.filter((cardObject) => cardObject.id !== targetID);
-  updateLocalStorage();
-  //access DOM to remove them.
-  if (tagname === "BUTTON") {
-    return event.target.parentNode.parentNode.parentNode.parentNode.removeChild(
-      event.target.parentNode.parentNode.parentNode
-    );
-  }
-  //IF Tag is icon tag inside the button tag.
-  return event.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(
-    event.target.parentNode.parentNode.parentNode.parentNode
-  );
+  const newUpdatedArr = globalStore.filter((cardObject) => {
+    cardObject.id !== targetID;
+  });
+
+  newUpdatedArr.map((cardObject) => {
+    const createNewCard = newCard(cardObject);
+    taskContainer.insertAdjacentHTML("beforeend", createNewCard);
+  });
+
+  globalStore = newUpdatedArr
+  //loop over the new globalStore, and inject updated cards to DOM.
 };

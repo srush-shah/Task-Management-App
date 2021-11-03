@@ -70,7 +70,9 @@ const deleteCard = (event) => {
   const targetID = event.target.id;
   const tagname = event.target.tagName;
   //search the globalStore array, remove the object with the id.
-  globalStore = globalStore.filter((cardObject) => cardObject.id !== targetID);
+  const newUpdatedArr = globalStore.filter(
+    (cardObject) => cardObject.id !== targetID
+  );
   updateLocalStorage();
   //access DOM to remove them.
   if (tagname === "BUTTON") {
