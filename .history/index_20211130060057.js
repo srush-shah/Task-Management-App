@@ -107,10 +107,4 @@ const editCard = (event) => {
   taskTitle.setAttribute("contenteditable", "true");
   taskDescription.setAttribute("contenteditable", "true");
   taskType.setAttribute("contenteditable", "true");
-
-  //access open task button to change it to save changes button
-  let submitButton = parentElement.childNodes[7].childNodes[1];
-
-  //change text of the button to Save Changes from Open Task
-  submitButton.innerHTML = "Save Changes";
 };

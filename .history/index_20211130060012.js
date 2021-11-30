@@ -103,14 +103,8 @@ const editCard = (event) => {
   let taskDescription = parentElement.childNodes[5].childNodes[3];
   let taskType = parentElement.childNodes[5].childNodes[5];
 
-  // add contenteditable attribute to each part of the card body using setAttribute() so it can be edited dynamically
-  taskTitle.setAttribute("contenteditable", "true");
-  taskDescription.setAttribute("contenteditable", "true");
-  taskType.setAttribute("contenteditable", "true");
-
-  //access open task button to change it to save changes button
-  let submitButton = parentElement.childNodes[7].childNodes[1];
-
-  //change text of the button to Save Changes from Open Task
-  submitButton.innerHTML = "Save Changes";
+  // add contenteditable attribute to each part of the card body using setAttribute()
+  taskTitle.setAttribute("contenteditable","true")
+  taskTitle.setAttribute("contenteditable","true")
+  taskTitle.setAttribute("contenteditable","true")
 };

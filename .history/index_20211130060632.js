@@ -112,5 +112,5 @@ const editCard = (event) => {
   let submitButton = parentElement.childNodes[7].childNodes[1];
 
   //change text of the button to Save Changes from Open Task
-  submitButton.innerHTML = "Save Changes";
+  sub
 };

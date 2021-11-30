@@ -13,8 +13,8 @@ const newCard = ({
 }) => `<div class="col-md-6 col-lg-4" id=${id}>
 <div class="card text-start">
   <div class="card-header d-flex justify-content-end gap-2">
-    <button type="button" id=${id} class="btn btn-outline-success" onclick="editCard.apply(this, arguments)"><i class="fas fa-pencil-alt" id=${id} onclick="editCard.apply(this, arguments)"></i></button>
-    <button type="button" id=${id} class="btn btn-outline-danger" onclick="deleteCard.apply(this, arguments)"><i class="fas fa-trash-alt" id=${id} onclick="deleteCard.apply(this,arguments)"></i></button>
+    <button type="button" id=${id} class="btn btn-outline-success" onclick="editCard(this, arguments)"><i class="fas fa-pencil-alt" id=${id} onclick="editCard(this, arguments)"></i></button>
+    <button type="button" id=${id} class="btn btn-outline-danger" onclick="deleteCard(this, arguments)"><i class="fas fa-trash-alt" id=${id} onclick="deleteCard(this,arguments)"></i></button>
   </div>
   <img src=${imageUrl} class="card-img-top" alt="Task Image">
   <div class="card-body">
@@ -85,32 +85,5 @@ const deleteCard = (event) => {
 };
 
 const editCard = (event) => {
-  //get id of the card
-  event = window.event;
-  const targetID = event.target.id;
-  const tagname = event.target.tagName;
-
-  //getting card title, description and type/badge
-  let parentElement;
-
-  if (tagname === "BUTTON") {
-    parentElement = event.target.parentNode.parentNode;
-  } else {
-    parentElement = event.target.parentNode.parentNode.parentNode;
-  }
-
-  let taskTitle = parentElement.childNodes[5].childNodes[1];
-  let taskDescription = parentElement.childNodes[5].childNodes[3];
-  let taskType = parentElement.childNodes[5].childNodes[5];
-
-  // add contenteditable attribute to each part of the card body using setAttribute() so it can be edited dynamically
-  taskTitle.setAttribute("contenteditable", "true");
-  taskDescription.setAttribute("contenteditable", "true");
-  taskType.setAttribute("contenteditable", "true");
-
-  //access open task button to change it to save changes button
-  let submitButton = parentElement.childNodes[7].childNodes[1];
-
-  //change text of the button to Save Changes from Open Task
-  submitButton.innerHTML = "Save Changes";
+  console.log("Hey edit card function has been called!");
 };
