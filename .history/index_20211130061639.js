@@ -23,7 +23,7 @@ const newCard = ({
     <span class="badge bg-primary">${taskType}</span>
   </div>
   <div class="card-footer text-muted">
-    <button type="button" id=${id} class="btn btn-outline-primary float-end">Open Task</button>
+    <button type="button" class="btn btn-outline-primary float-end">Open Task</button>
   </div>
 </div>
 </div>`;
@@ -115,10 +115,7 @@ const editCard = (event) => {
   submitButton.innerHTML = "Save Changes";
 
   //setAttribute for submit button to call saveEditChanges()
-  submitButton.setAttribute(
-    "onclick",
-    "saveEditChanges.apply(this, arguments)"
-  );
+  submitButton.setAttribute("onclick","saveEditChanges.apply(this, arguments)")
 };
 
 const saveEditChanges = (event) => {
@@ -145,20 +142,4 @@ const saveEditChanges = (event) => {
     taskType: taskType.innerHTML,
     taskDescription: taskDescription.innerHTML,
   };
-
-  //add updatedData to local storage and globalstore array
-  globalStore = globalStore.map((task) => {
-    if (task.id === targetID) {
-      return {
-        id: task.id,
-        imageUrl: task.imageUrl,
-        taskTitle: updatedData.taskTitle,
-        taskType: updatedData.taskType,
-        taskDescription: updatedData.taskDescription,
-      };
-    }
-    return task; //important
-  });
-
-  updateLocalStorage();
 };

@@ -23,7 +23,7 @@ const newCard = ({
     <span class="badge bg-primary">${taskType}</span>
   </div>
   <div class="card-footer text-muted">
-    <button type="button" id=${id} class="btn btn-outline-primary float-end">Open Task</button>
+    <button type="button" class="btn btn-outline-primary float-end">Open Task</button>
   </div>
 </div>
 </div>`;
@@ -152,13 +152,10 @@ const saveEditChanges = (event) => {
       return {
         id: task.id,
         imageUrl: task.imageUrl,
-        taskTitle: updatedData.taskTitle,
-        taskType: updatedData.taskType,
-        taskDescription: updatedData.taskDescription,
+        taskTitle: ,
+        taskType: document.getElementById("taskType").value,
+        taskDescription: document.getElementById("taskDescription").value,
       };
     }
-    return task; //important
   });
-
-  updateLocalStorage();
 };

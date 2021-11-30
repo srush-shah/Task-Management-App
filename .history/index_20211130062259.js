@@ -23,7 +23,7 @@ const newCard = ({
     <span class="badge bg-primary">${taskType}</span>
   </div>
   <div class="card-footer text-muted">
-    <button type="button" id=${id} class="btn btn-outline-primary float-end">Open Task</button>
+    <button type="button" class="btn btn-outline-primary float-end">Open Task</button>
   </div>
 </div>
 </div>`;
@@ -157,8 +157,5 @@ const saveEditChanges = (event) => {
         taskDescription: updatedData.taskDescription,
       };
     }
-    return task; //important
   });
-
-  updateLocalStorage();
 };

@@ -23,7 +23,7 @@ const newCard = ({
     <span class="badge bg-primary">${taskType}</span>
   </div>
   <div class="card-footer text-muted">
-    <button type="button" id=${id} class="btn btn-outline-primary float-end">Open Task</button>
+    <button type="button" class="btn btn-outline-primary float-end">Open Task</button>
   </div>
 </div>
 </div>`;
@@ -113,12 +113,6 @@ const editCard = (event) => {
 
   //change text of the button to Save Changes from Open Task
   submitButton.innerHTML = "Save Changes";
-
-  //setAttribute for submit button to call saveEditChanges()
-  submitButton.setAttribute(
-    "onclick",
-    "saveEditChanges.apply(this, arguments)"
-  );
 };
 
 const saveEditChanges = (event) => {
@@ -126,8 +120,6 @@ const saveEditChanges = (event) => {
   event = window.event;
   const targetID = event.target.id;
   const tagname = event.target.tagName;
-
-  //getting card title, description and type/badge
   let parentElement;
 
   if (tagname === "BUTTON") {
@@ -135,30 +127,4 @@ const saveEditChanges = (event) => {
   } else {
     parentElement = event.target.parentNode.parentNode.parentNode;
   }
-
-  let taskTitle = parentElement.childNodes[5].childNodes[1];
-  let taskDescription = parentElement.childNodes[5].childNodes[3];
-  let taskType = parentElement.childNodes[5].childNodes[5];
-
-  const updatedData = {
-    taskTitle: taskTitle.innerHTML,
-    taskType: taskType.innerHTML,
-    taskDescription: taskDescription.innerHTML,
-  };
-
-  //add updatedData to local storage and globalstore array
-  globalStore = globalStore.map((task) => {
-    if (task.id === targetID) {
-      return {
-        id: task.id,
-        imageUrl: task.imageUrl,
-        taskTitle: updatedData.taskTitle,
-        taskType: updatedData.taskType,
-        taskDescription: updatedData.taskDescription,
-      };
-    }
-    return task; //important
-  });
-
-  updateLocalStorage();
-};
+}
