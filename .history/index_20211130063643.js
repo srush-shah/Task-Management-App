@@ -139,7 +139,6 @@ const saveEditChanges = (event) => {
   let taskTitle = parentElement.childNodes[5].childNodes[1];
   let taskDescription = parentElement.childNodes[5].childNodes[3];
   let taskType = parentElement.childNodes[5].childNodes[5];
-  let submitButton = parentElement.childNodes[7].childNodes[1];
 
   const updatedData = {
     taskTitle: taskTitle.innerHTML,
@@ -168,6 +167,5 @@ const saveEditChanges = (event) => {
   taskDescription.setAttribute("contenteditable", "false");
   taskType.setAttribute("contenteditable", "false");
 
-  submitButton.removeAttribute("onclick");
   submitButton.innerHTML = "Open Task";
 };
